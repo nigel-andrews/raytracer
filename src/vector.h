@@ -8,101 +8,98 @@
 #    include <format>
 #endif // ! __cpp_lib_print
 
-namespace raytracer
+class Vec3
 {
-    class Vec3
+public:
+    Vec3() = default;
+
+    Vec3(float x, float y, float z)
+        : x_(x)
+        , y_(y)
+        , z_(z)
+    {}
+
+    static Vec3 unit(const Vec3& v)
     {
-    public:
-        Vec3() = default;
+        float len = v.norm();
+        return v / len;
+    }
 
-        Vec3(float x, float y, float z)
-            : x_(x)
-            , y_(y)
-            , z_(z)
-        {}
+    float norm() const
+    {
+        return std::sqrt(this->x_ * this->x_ + this->y_ * this->y_
+                         + this->z_ * this->z_);
+    }
 
-        static Vec3 unit(const Vec3& v)
-        {
-            float len = v.norm();
-            return v / len;
-        }
+    Vec3 normalize() const
+    {
+        float len = this->norm();
 
-        float norm() const
-        {
-            return std::sqrt(this->x_ * this->x_ + this->y_ * this->y_
-                             + this->z_ * this->z_);
-        }
+        return { this->x_ / len, this->y_ / len, this->z_ / len };
+    }
 
-        Vec3 normalize() const
-        {
-            float len = this->norm();
+    Vec3 operator+(const Vec3& rhs)
+    {
+        return { this->x_ + rhs.x_, this->y_ + rhs.y_, this->z_ + rhs.z_ };
+    }
 
-            return { this->x_ / len, this->y_ / len, this->z_ / len };
-        }
+    Vec3 operator-() const
+    {
+        return { -this->x_, -this->y_, -this->z_ };
+    }
 
-        Vec3 operator+(const Vec3& rhs)
-        {
-            return { this->x_ + rhs.x_, this->y_ + rhs.y_, this->z_ + rhs.z_ };
-        }
+    Vec3 operator-(const Vec3& rhs)
+    {
+        return *this + -rhs;
+    }
 
-        Vec3 operator-() const
-        {
-            return { -this->x_, -this->y_, -this->z_ };
-        }
+    Vec3& operator+=(const Vec3& rhs)
+    {
+        this->x_ += rhs.x_;
+        this->y_ += rhs.y_;
+        this->z_ += rhs.z_;
 
-        Vec3 operator-(const Vec3& rhs)
-        {
-            return *this + -rhs;
-        }
+        return *this;
+    }
 
-        Vec3& operator+=(const Vec3& rhs)
-        {
-            this->x_ += rhs.x_;
-            this->y_ += rhs.y_;
-            this->z_ += rhs.z_;
+    float operator*(const Vec3& rhs) const
+    {
+        return this->x_ * rhs.x_ + this->y_ * rhs.y_ + this->z_ * rhs.z_;
+    }
 
-            return *this;
-        }
+    Vec3 operator*(float l) const
+    {
+        return { this->x_ * l, this->y_ * l, this->z_ * l };
+    }
 
-        float operator*(const Vec3& rhs) const
-        {
-            return this->x_ * rhs.x_ + this->y_ * rhs.y_ + this->z_ * rhs.z_;
-        }
+    Vec3 operator/(float l) const
+    {
+        return *this * (1.f / l);
+    }
 
-        Vec3 operator*(float l) const
-        {
-            return { this->x_ * l, this->y_ * l, this->z_ * l };
-        }
+    Vec3& operator*=(float l)
+    {
+        this->x_ *= l;
+        this->y_ *= l;
+        this->z_ *= l;
 
-        Vec3 operator/(float l) const
-        {
-            return *this * (1.f / l);
-        }
+        return *this;
+    }
 
-        Vec3& operator*=(float l)
-        {
-            this->x_ *= l;
-            this->y_ *= l;
-            this->z_ *= l;
-
-            return *this;
-        }
-
-        friend std::ostream& operator<<(std::ostream& os, const Vec3& rhs)
-        {
+    friend std::ostream& operator<<(std::ostream& os, const Vec3& rhs)
+    {
 #ifdef __cpp_lib_print
-            std::print(os,
+        std::print(os,
 #else // ! __cpp_lib_print
-            os << std::format(
+        os << std::format(
 #endif // __cpp_lib_print
-                       "({}, {}, {})", rhs.x_, rhs.y_, rhs.z_);
+                   "({}, {}, {})", rhs.x_, rhs.y_, rhs.z_);
 
-            return os;
-        }
+        return os;
+    }
 
-    private:
-        float x_;
-        float y_;
-        float z_;
-    };
-} // namespace raytracer
+private:
+    float x_;
+    float y_;
+    float z_;
+};
