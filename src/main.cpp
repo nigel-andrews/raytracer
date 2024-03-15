@@ -1,16 +1,43 @@
 #include <iostream>
 
-#include "vector/vector.h"
-
-using namespace raytracer;
+#include "window.h"
 
 int main()
 {
-    std::cout << "Hello World !\n";
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0)
+        std::cout << SDL_GetError();
 
-    Vec3 test = { 1, 1, 1 };
+    Window window("Raytracer", 800, 600,
+                  SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN);
 
-    std::cout << test << std::endl;
+    if (!window)
+        std::cout << SDL_GetError();
+
+    bool run = true;
+    SDL_Event event;
+
+    while (run)
+    {
+        if (!SDL_PollEvent(&event))
+            continue;
+
+        switch (event.type)
+        {
+        case SDL_KEYDOWN:
+            run = event.key.keysym.sym != SDLK_ESCAPE;
+            break;
+        case SDL_QUIT:
+            run = false;
+            break;
+        default:
+            break;
+        }
+
+        window.draw();
+    }
+
+    std::cout << "Quitting\n";
+    SDL_Quit();
 
     return 0;
 }

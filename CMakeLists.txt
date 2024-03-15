@@ -4,6 +4,9 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(raytracer)
 
+find_package(SDL2 REQUIRED)
+include_directories(${SDL2_INCLUDE_DIRS})
+
 add_library(compile_options INTERFACE)
 
 set_target_properties(compile_options PROPERTIES CXX_STANDARD 23 CXX_EXTENSIONS
@@ -27,4 +30,4 @@ target_link_options(compile_options INTERFACE
 
 add_executable(raytracer src/main.cpp)
 
-target_link_libraries(raytracer PRIVATE compile_options)
+target_link_libraries(raytracer PRIVATE compile_options ${SDL2_LIBRARIES})
