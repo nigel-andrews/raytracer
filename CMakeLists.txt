@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 project(raytracer)
 
 add_library(compile_options INTERFACE)
@@ -12,6 +14,7 @@ target_compile_options(
   INTERFACE "-Wall"
             "-Wextra"
             "-pedantic"
+            "-std=c++23"
             $<$<CONFIG:Release>:-O3>
             $<$<CONFIG:Release>:-Werror>
             $<$<CONFIG:Debug>:-O0>
