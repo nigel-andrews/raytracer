@@ -21,6 +21,12 @@ namespace raytracer
             , z_(z)
         {}
 
+        static Vec3 unit(const Vec3& v)
+        {
+            float len = v.norm();
+            return v / len;
+        }
+
         float norm() const
         {
             return std::sqrt(this->x_ * this->x_ + this->y_ * this->y_
@@ -66,6 +72,11 @@ namespace raytracer
         Vec3 operator*(float l) const
         {
             return { this->x_ * l, this->y_ * l, this->z_ * l };
+        }
+
+        Vec3 operator/(float l) const
+        {
+            return *this * (1.f / l);
         }
 
         Vec3& operator*=(float l)
