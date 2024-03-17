@@ -9,9 +9,6 @@ include_directories(${SDL2_INCLUDE_DIRS})
 
 add_library(compile_options INTERFACE)
 
-set_target_properties(compile_options PROPERTIES CXX_STANDARD 23 CXX_EXTENSIONS
-                                                                 OFF)
-
 target_compile_options(
   compile_options
   INTERFACE "-Wall"
@@ -29,5 +26,9 @@ target_link_options(compile_options INTERFACE
                     $<$<CONFIG:Debug>:-fsanitize=address>)
 
 add_executable(raytracer src/main.cpp)
+
+set_target_properties(raytracer PROPERTIES CXX_STANDARD 23 CXX_EXTENSIONS OFF)
+
+target_include_directories(raytracer PUBLIC src)
 
 target_link_libraries(raytracer PRIVATE compile_options ${SDL2_LIBRARIES})
