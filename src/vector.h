@@ -21,8 +21,7 @@ public:
 
     static Vec3 unit(const Vec3& v)
     {
-        float len = v.norm();
-        return v / len;
+        return v / v.norm();
     }
 
     float norm() const
@@ -38,7 +37,7 @@ public:
         return { this->x_ / len, this->y_ / len, this->z_ / len };
     }
 
-    Vec3 operator+(const Vec3& rhs)
+    Vec3 operator+(const Vec3& rhs) const
     {
         return { this->x_ + rhs.x_, this->y_ + rhs.y_, this->z_ + rhs.z_ };
     }
@@ -48,7 +47,7 @@ public:
         return { -this->x_, -this->y_, -this->z_ };
     }
 
-    Vec3 operator-(const Vec3& rhs)
+    Vec3 operator-(const Vec3& rhs) const
     {
         return *this + -rhs;
     }
