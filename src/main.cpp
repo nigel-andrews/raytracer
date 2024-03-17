@@ -2,38 +2,41 @@
 
 #include "window.h"
 
-int main()
+int main(void)
 {
     if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0)
         std::cout << SDL_GetError();
 
-    Window window("Raytracer", 800, 600,
-                  SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN);
-
-    if (!window)
-        std::cout << SDL_GetError();
-
-    bool run = true;
-    SDL_Event event;
-
-    while (run)
     {
-        if (!SDL_PollEvent(&event))
-            continue;
+        Window window("Raytracer", 800, 600,
+                      SDL_WINDOW_RESIZABLE | SDL_WINDOW_SHOWN);
 
-        switch (event.type)
+        if (!window)
+            std::cout << SDL_GetError();
+
+        bool run = true;
+        SDL_Event event;
+
+        while (run)
         {
-        case SDL_KEYDOWN:
-            run = event.key.keysym.sym != SDLK_ESCAPE;
-            break;
-        case SDL_QUIT:
-            run = false;
-            break;
-        default:
-            break;
-        }
+            if (!SDL_PollEvent(&event))
+                continue;
 
-        window.draw();
+            switch (event.type)
+            {
+            case SDL_KEYDOWN:
+                run = event.key.keysym.sym != SDLK_ESCAPE;
+                break;
+            case SDL_QUIT:
+                run = false;
+                break;
+            default:
+                break;
+            }
+
+            // Compute and draw
+            window.draw();
+        }
     }
 
     std::cout << "Quitting\n";
