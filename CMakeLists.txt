@@ -25,10 +25,16 @@ target_compile_options(
 target_link_options(compile_options INTERFACE
                     $<$<CONFIG:Debug>:-fsanitize=address>)
 
+set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
+
+add_subdirectory(src/geometry)
+add_subdirectory(src/scene)
+
 add_executable(raytracer src/main.cpp)
 
 set_target_properties(raytracer PROPERTIES CXX_STANDARD 23 CXX_EXTENSIONS OFF)
 
-target_include_directories(raytracer PUBLIC src)
+target_include_directories(raytracer PRIVATE ${SRC_DIR})
 
-target_link_libraries(raytracer PRIVATE compile_options ${SDL2_LIBRARIES})
+target_link_libraries(raytracer PRIVATE compile_options ${SDL2_LIBRARIES}
+                                        geometry scene)
