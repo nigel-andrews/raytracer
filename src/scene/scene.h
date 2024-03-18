@@ -3,8 +3,8 @@
 #include <vector>
 
 #include "camera.h"
-#include "geometry/sphere.h"
 #include "light.h"
+#include "objects/sphere.h"
 
 class Scene
 {

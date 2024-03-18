@@ -2,7 +2,7 @@
 
 #include <optional>
 
-#include "vector.h"
+#include "geometry/vector.h"
 
 struct Light
 {

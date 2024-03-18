@@ -27,7 +27,7 @@ target_link_options(compile_options INTERFACE
 
 set(SRC_DIR ${CMAKE_SOURCE_DIR}/src)
 
-add_subdirectory(src/geometry)
+add_subdirectory(src/objects)
 add_subdirectory(src/scene)
 
 add_executable(raytracer src/main.cpp)

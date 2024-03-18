@@ -1,6 +1,6 @@
 #pragma once
 
-#include "vector.h"
+#include "geometry/vector.h"
 
 class Camera
 {
