@@ -6,7 +6,7 @@ class Camera
 {
 public:
     Camera() = default;
-    Camera(float near, float fov_x, float fov_y, const Vec3& position,
+    Camera(float near, float fov, const Vec3& position,
            const Vec3& view_direction, const Vec3& up);
 
     void look_at(const Vec3& target);
@@ -29,8 +29,7 @@ public:
 
 private:
     float near_;
-    float fov_x_;
-    float fov_y_;
+    float fov_;
 
     Vec3 position_;
     Vec3 view_direction_;
