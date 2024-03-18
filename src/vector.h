@@ -13,6 +13,12 @@ class Vec3
 public:
     Vec3() = default;
 
+    Vec3(float value)
+        : x_(value)
+        , y_(value)
+        , z_(value)
+    {}
+
     Vec3(float x, float y, float z)
         : x_(x)
         , y_(y)
@@ -95,6 +101,21 @@ public:
                    "({}, {}, {})", rhs.x_, rhs.y_, rhs.z_);
 
         return os;
+    }
+
+    float x() const
+    {
+        return this->x_;
+    }
+
+    float y() const
+    {
+        return this->y_;
+    }
+
+    float z() const
+    {
+        return this->z_;
     }
 
 private:
