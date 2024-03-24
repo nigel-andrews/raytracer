@@ -23,6 +23,11 @@ public:
         this->objects_.push_back(object);
     }
 
+    void draw_scene(int width, int height) const
+    {
+        this->camera_.shoot_rays(width, height, this->objects_);
+    }
+
 private:
     Camera camera_;
     std::vector<Light> lights_;
