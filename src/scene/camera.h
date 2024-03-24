@@ -33,6 +33,7 @@ public:
 
 private:
     float near_;
+    // TODO: have fov of both angles
     float fov_;
 
     Vec3 position_;

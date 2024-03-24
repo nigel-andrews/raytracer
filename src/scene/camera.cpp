@@ -20,6 +20,7 @@ void Camera::shoot_rays(int width, int height,
     std::cout << std::format("P3\n{} {}\n255\n", width, height);
 
     auto viewport_width = (this->near_ * std::tan(this->fov_ / 2)) * 2;
+    // TODO: compute this with tangent of next fov
     auto viewport_height = viewport_width
         * (static_cast<float>(height) / static_cast<float>(width));
     const Vec3 viewport_x{ viewport_width, 0.f, 0.f };
@@ -31,7 +32,6 @@ void Camera::shoot_rays(int width, int height,
     Vec3 start = this->position_ + Vec3{ 0.f, 0.f, this->near_ }
         - (viewport_x / 2) - (viewport_y / 2);
 
-    std::string str;
     for (int y = 0; y < height; y++)
     {
         for (int x = 0; x < width; x++)
@@ -43,21 +43,26 @@ void Camera::shoot_rays(int width, int height,
             auto a = 0.5 * (target.normalize().y() + 1.0);
 
             Vec3 color = Vec3(1.0) * (1.0 - a) + Vec3(0.5, 0.7, 1.0) * a;
-            str =
+            std::optional<std::string> line;
+
+            for (auto&& object : objects)
+            {
+                line = object.cast_ray(current).and_then([](float) {
+                    // Compute stuff
+                    return std::make_optional<std::string>(
+                        std::format("{} {} {}\n", 255, 255, 255));
+                });
+            }
+
+            std::cout << line.value_or(
                 std::format("{} {} {}\n", static_cast<int>(255.999 * color.x()),
                             static_cast<int>(255.999 * color.y()),
-                            static_cast<int>(255.999 * color.z()));
-
-            for (const Sphere& object : objects)
-                if (object.is_intersecting(current))
-                    str = std::format("{} {} {}\n", 255, 255, 255);
-
-            std::cout << str;
+                            static_cast<int>(255.999 * color.z())));
         }
     }
 }
 
-void Camera::look_at(const Vec3& target)
+inline void Camera::look_at(const Vec3& target)
 {
     this->view_direction_ = target.normalize();
 }

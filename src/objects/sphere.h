@@ -12,7 +12,7 @@ public:
         , radius_(radius)
     {}
 
-    bool is_intersecting(const Ray& ray) const final;
+    std::optional<float> cast_ray(const Ray& ray) const final;
     Vec3 normal_get(const Vec3& /* point */) const final
     {
         return {};
