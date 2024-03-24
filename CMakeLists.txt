@@ -4,9 +4,6 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 project(raytracer)
 
-find_package(SDL2 REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS})
-
 add_library(compile_options INTERFACE)
 
 target_compile_options(
@@ -36,5 +33,4 @@ set_target_properties(raytracer PROPERTIES CXX_STANDARD 23 CXX_EXTENSIONS OFF)
 
 target_include_directories(raytracer PRIVATE ${SRC_DIR})
 
-target_link_libraries(raytracer PRIVATE compile_options ${SDL2_LIBRARIES}
-                                        geometry scene)
+target_link_libraries(raytracer PRIVATE compile_options geometry scene)
