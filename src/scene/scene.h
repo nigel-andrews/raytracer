@@ -9,14 +9,8 @@
 class Scene
 {
 public:
-    Scene(const Camera camera)
+    explicit Scene(const Camera& camera)
         : camera_(camera)
-    {}
-
-    template <typename... Ts>
-    Scene(const Camera camera, Ts... lights)
-        : camera_(camera)
-        , lights_(std::forward(lights...))
     {}
 
     void add_light(const Light& light)
