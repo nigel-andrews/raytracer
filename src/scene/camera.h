@@ -1,6 +1,9 @@
 #pragma once
 
+#include <vector>
+
 #include "geometry/vector.h"
+#include "objects/sphere.h"
 
 class Camera
 {
@@ -10,7 +13,7 @@ public:
            const Vec3& view_direction, const Vec3& up);
 
     void look_at(const Vec3& target);
-    void shoot_rays(int width, int height);
+    void shoot_rays(int width, int height, const std::vector<Sphere>& objects);
 
     float near_get() const
     {
