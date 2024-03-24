@@ -5,8 +5,6 @@
 
 #include "geometry/ray.h"
 
-constexpr float inv_aspect_ratio = 9.f / 16.f;
-
 Camera::Camera(float near, float fov, const Vec3& position,
                const Vec3& view_direction, const Vec3& up)
     : near_(near)
@@ -17,12 +15,13 @@ Camera::Camera(float near, float fov, const Vec3& position,
 {}
 
 void Camera::shoot_rays(int width, int height,
-                        const std::vector<Sphere>& objects)
+                        const std::vector<Sphere>& objects) const
 {
     std::cout << std::format("P3\n{} {}\n255\n", width, height);
 
     auto viewport_width = (this->near_ * std::tan(this->fov_ / 2)) * 2;
-    auto viewport_height = viewport_width * inv_aspect_ratio;
+    auto viewport_height = viewport_width
+        * (static_cast<float>(height) / static_cast<float>(width));
     const Vec3 viewport_x{ viewport_width, 0.f, 0.f };
     const Vec3 viewport_y{ 0.f, -viewport_height, 0.f };
 
