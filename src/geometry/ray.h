@@ -9,6 +9,11 @@ struct Ray
         , direction(direction)
     {}
 
+    Vec3 operator[](float t) const
+    {
+        return origin + direction * t;
+    }
+
     Vec3 origin;
     Vec3 direction;
 };
