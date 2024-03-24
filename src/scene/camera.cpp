@@ -32,6 +32,7 @@ void Camera::shoot_rays(int width, int height,
     Vec3 start = this->position_ + Vec3{ 0.f, 0.f, this->near_ }
         - (viewport_x / 2) - (viewport_y / 2);
 
+    // TODO: Remove double loop by single loop + parallelize.
     for (int y = 0; y < height; y++)
     {
         for (int x = 0; x < width; x++)
