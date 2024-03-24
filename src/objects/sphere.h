@@ -1,17 +1,22 @@
 #pragma once
 
-#include "geometry/vector.h"
+#include "objects/object.h"
 
 // TODO: Make this a subclass of object
-class Sphere
+class Sphere : public IObject
 {
+public:
+    virtual ~Sphere() = default;
     Sphere(const Vec3& position, float radius = 1.f)
         : position_(position)
         , radius_(radius)
     {}
 
-    bool intersect(const Vec3& ray) const;
-    Vec3 normal_get(const Vec3& point) const;
+    bool is_intersecting(const Ray& ray) const final;
+    Vec3 normal_get(const Vec3& /* point */) const final
+    {
+        return {};
+    }
 
     // TODO: object materials
 
