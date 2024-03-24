@@ -13,13 +13,13 @@ class Vec3
 public:
     Vec3() = default;
 
-    Vec3(float value)
+    explicit constexpr Vec3(float value)
         : x_(value)
         , y_(value)
         , z_(value)
     {}
 
-    Vec3(float x, float y, float z)
+    constexpr Vec3(float x, float y, float z)
         : x_(x)
         , y_(y)
         , z_(z)
@@ -63,6 +63,13 @@ public:
         this->x_ += rhs.x_;
         this->y_ += rhs.y_;
         this->z_ += rhs.z_;
+
+        return *this;
+    }
+
+    Vec3& operator-=(const Vec3& rhs)
+    {
+        *this += -rhs;
 
         return *this;
     }
