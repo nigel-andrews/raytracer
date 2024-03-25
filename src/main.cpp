@@ -8,9 +8,9 @@ int main(void)
     Scene scene{ Camera{ 0.5f,
                          M_PI_2,
                          { 0.f, 0.f, 0.f },
-                         { 0.f, 0.f, 1.f },
+                         { 0.f, 0.f, -1.f },
                          { 0.f, 1.f, 0.f } } };
-    scene.add_object(Sphere{ { 0.f, 0.f, 10.f }, 3.f });
+    scene.add_object(Sphere{ { 0.f, 0.f, -10.f }, 3.f });
     scene.draw_scene(w, h);
 
     return 0;

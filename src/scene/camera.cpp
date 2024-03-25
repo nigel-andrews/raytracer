@@ -29,7 +29,7 @@ void Camera::shoot_rays(int width, int height,
     Vec3 delta_x = viewport_x / width;
     Vec3 delta_y = viewport_y / height;
     // TODO: Offset to test middle of chunk
-    Vec3 start = this->position_ + Vec3{ 0.f, 0.f, this->near_ }
+    Vec3 start = this->position_ - Vec3{ 0.f, 0.f, this->near_ }
         - (viewport_x / 2) - (viewport_y / 2);
 
     // TODO: Remove double loop by single loop + parallelize.
@@ -48,10 +48,20 @@ void Camera::shoot_rays(int width, int height,
 
             for (auto&& object : objects)
             {
-                line = object.cast_ray(current).and_then([](float) {
-                    // Compute stuff
-                    return std::make_optional<std::string>(
-                        std::format("{} {} {}\n", 255, 255, 255));
+                line = object.cast_ray(current).and_then([&object,
+                                                          &current](float t) {
+                    auto normal = object.normal_get(current[t]);
+
+                    normal = normal / 2.f;
+                    normal += { 0.5f, 0.5f, 0.5f };
+                    normal *= 255.99f;
+
+                    auto fmt =
+                        std::format("{} {} {}\n", static_cast<int>(normal.x()),
+                                    static_cast<int>(normal.y()),
+                                    static_cast<int>(normal.z()));
+
+                    return std::make_optional<std::string>(fmt);
                 });
             }
 
