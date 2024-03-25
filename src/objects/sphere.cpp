@@ -5,9 +5,11 @@
 std::optional<float> Sphere::cast_ray(const Ray& ray) const
 {
     Vec3 oc = ray.origin - this->position_;
-    float a = ray.direction * ray.direction;
+
+    float a = std::pow(ray.direction.norm(), 2);
     float b = 2.f * (oc * ray.direction);
-    float c = (oc * oc) - (this->radius_ * this->radius_);
+    float c = std::pow(oc.norm(), 2) - std::pow(this->radius_, 2);
+
     float discriminant = b * b - 4.f * a * c;
 
     if (discriminant < 0.f)
