@@ -11,7 +11,7 @@ struct Ray
 
     Vec3 operator[](float t) const
     {
-        return origin + direction * t;
+        return origin + (direction * t);
     }
 
     Vec3 origin;

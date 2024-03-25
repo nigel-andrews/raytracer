@@ -13,6 +13,9 @@ class Vec3
 public:
     Vec3() = default;
 
+    Vec3(const Vec3& rhs) = default;
+    Vec3& operator=(const Vec3& rhs) = default;
+
     explicit constexpr Vec3(float value)
         : x_(value)
         , y_(value)
