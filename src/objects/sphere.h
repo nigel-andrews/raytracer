@@ -13,10 +13,7 @@ public:
     {}
 
     std::optional<float> cast_ray(const Ray& ray) const final;
-    Vec3 normal_get(const Vec3& /* point */) const final
-    {
-        return {};
-    }
+    Vec3 normal_get(const Vec3& point) const final;
 
     // TODO: object materials
 
