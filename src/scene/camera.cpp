@@ -52,7 +52,10 @@ void Camera::shoot_rays(int width, int height,
             {
                 auto color = object.cast_ray(current).and_then(
                     [&object, &current, &closest](float t) {
-                        closest = current[t].z();
+                        if (closest != -INFINITY && t > closest)
+                            return std::optional<std::string>{};
+
+                        closest = t;
 
                         auto normal = object.normal_get(current[t]);
 
