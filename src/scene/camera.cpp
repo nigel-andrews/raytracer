@@ -46,23 +46,32 @@ void Camera::shoot_rays(int width, int height,
             Vec3 color = Vec3(1.0) * (1.0 - a) + Vec3(0.5, 0.7, 1.0) * a;
             std::optional<std::string> line;
 
+            float closest = -INFINITY;
+
             for (auto&& object : objects)
             {
-                line = object.cast_ray(current).and_then([&object,
-                                                          &current](float t) {
-                    auto normal = object.normal_get(current[t]);
+                auto color = object.cast_ray(current).and_then(
+                    [&object, &current, &closest](float t) {
+                        closest = current[t].z();
 
-                    normal = normal / 2.f;
-                    normal += { 0.5f, 0.5f, 0.5f };
-                    normal *= 255.99f;
+                        auto normal = object.normal_get(current[t]);
 
-                    auto fmt =
-                        std::format("{} {} {}\n", static_cast<int>(normal.x()),
-                                    static_cast<int>(normal.y()),
-                                    static_cast<int>(normal.z()));
+                        normal = normal / 2.f;
+                        normal += { 0.5f, 0.5f, 0.5f };
+                        normal *= 255.99f;
 
-                    return std::make_optional<std::string>(fmt);
-                });
+                        auto fmt = std::format("{} {} {}\n",
+                                               static_cast<int>(normal.x()),
+                                               static_cast<int>(normal.y()),
+                                               static_cast<int>(normal.z()));
+
+                        return std::make_optional<std::string>(fmt);
+                    });
+
+                if (!color)
+                    continue;
+
+                line = color;
             }
 
             std::cout << line.value_or(

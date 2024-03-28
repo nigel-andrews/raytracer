@@ -10,7 +10,9 @@ int main(void)
                          { 0.f, 0.f, 0.f },
                          { 0.f, 0.f, -1.f },
                          { 0.f, 1.f, 0.f } } };
-    scene.add_object(Sphere{ { 0.f, 0.f, -10.f }, 3.f });
+    scene.add_object(Sphere{ { -5.f, 0.f, -10.f }, 3.f });
+    scene.add_object(Sphere{ { 5.f, 0.f, -10.f }, 3.f });
+    scene.add_object(Sphere{ { 0.f, 0.f, -5.f }, 3.f });
     scene.draw_scene(w, h);
 
     return 0;
