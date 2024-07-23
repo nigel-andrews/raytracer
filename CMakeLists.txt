@@ -10,8 +10,8 @@ target_compile_options(
   compile_options
   INTERFACE "-Wall"
             "-Wextra"
-            "-pedantic"
             "-std=c++23"
+            "-Wno-gnu-anonymous-struct" # Anon structs
             $<$<CONFIG:Release>:-O3>
             $<$<CONFIG:Release>:-Werror>
             $<$<CONFIG:Debug>:-O0>
@@ -29,3 +29,5 @@ add_executable(raytracer src/main.cpp)
 set_target_properties(raytracer PROPERTIES CXX_STANDARD 23 CXX_EXTENSIONS OFF)
 
 target_include_directories(raytracer PRIVATE ${SRC_DIR})
+
+target_link_libraries(raytracer PRIVATE compile_options)
