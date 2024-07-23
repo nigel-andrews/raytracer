@@ -23,6 +23,7 @@ namespace raytracer::linalg
         vec() = default;
 
         constexpr vec operator+(const vec& rhs);
+
         constexpr vec operator-(const vec& rhs);
         constexpr vec operator*(const vec& rhs);
         constexpr vec operator*(float scalar);
@@ -35,6 +36,7 @@ namespace raytracer::linalg
         constexpr vec& operator/=(const vec& rhs);
 
         constexpr T& operator[](unsigned long index);
+        constexpr const T& operator[](unsigned long index) const;
     };
 
     template <Number T>
@@ -42,6 +44,10 @@ namespace raytracer::linalg
     {
         typed_vec2()
             : data{}
+        {}
+
+        typed_vec2(const vec<T, 2>& rhs)
+            : data{ rhs }
         {}
 
         typed_vec2(T val)
@@ -67,6 +73,64 @@ namespace raytracer::linalg
             };
         };
 
+        constexpr typed_vec2 operator+(const typed_vec2& rhs)
+        {
+            return data + rhs.data;
+        }
+
+        constexpr typed_vec2 operator-(const typed_vec2& rhs)
+        {
+            return data - rhs.data;
+        }
+        constexpr typed_vec2 operator*(const typed_vec2& rhs)
+        {
+            return data * rhs.data;
+        }
+        constexpr typed_vec2 operator*(float scalar)
+        {
+            return data * scalar;
+        }
+        constexpr typed_vec2 operator/(const typed_vec2& rhs)
+        {
+            return data / rhs;
+        }
+
+        constexpr typed_vec2& operator+=(const typed_vec2& rhs)
+        {
+            data += rhs.data;
+            return *this;
+        }
+        constexpr typed_vec2& operator-=(const typed_vec2& rhs)
+        {
+            data -= rhs.data;
+            return *this;
+        }
+        constexpr typed_vec2& operator*=(const typed_vec2& rhs)
+        {
+            data *= rhs.data;
+            return *this;
+        }
+        constexpr typed_vec2& operator*=(float scalar)
+        {
+            data *= scalar;
+            return *this;
+        }
+        constexpr typed_vec2& operator/=(const typed_vec2& rhs)
+        {
+            data /= rhs.data;
+            return *this;
+        }
+
+        constexpr T& operator[](unsigned long index)
+        {
+            return data[index];
+        }
+
+        constexpr const T& operator[](unsigned long index) const
+        {
+            return data[index];
+        }
+
         static_assert(sizeof(data) == sizeof(T) * 2);
     };
 
@@ -75,6 +139,10 @@ namespace raytracer::linalg
     {
         typed_vec3()
             : data{}
+        {}
+
+        typed_vec3(const vec<T, 3>& rhs)
+            : data{ rhs }
         {}
 
         typed_vec3(T val)
@@ -102,6 +170,64 @@ namespace raytracer::linalg
             };
         };
 
+        constexpr typed_vec3 operator+(const typed_vec3& rhs)
+        {
+            return data + rhs.data;
+        }
+
+        constexpr typed_vec3 operator-(const typed_vec3& rhs)
+        {
+            return data - rhs.data;
+        }
+        constexpr typed_vec3 operator*(const typed_vec3& rhs)
+        {
+            return data * rhs.data;
+        }
+        constexpr typed_vec3 operator*(float scalar)
+        {
+            return data * scalar;
+        }
+        constexpr typed_vec3 operator/(const typed_vec3& rhs)
+        {
+            return data / rhs;
+        }
+
+        constexpr typed_vec3& operator+=(const typed_vec3& rhs)
+        {
+            data += rhs.data;
+            return *this;
+        }
+        constexpr typed_vec3& operator-=(const typed_vec3& rhs)
+        {
+            data -= rhs.data;
+            return *this;
+        }
+        constexpr typed_vec3& operator*=(const typed_vec3& rhs)
+        {
+            data *= rhs.data;
+            return *this;
+        }
+        constexpr typed_vec3& operator*=(float scalar)
+        {
+            data *= scalar;
+            return *this;
+        }
+        constexpr typed_vec3& operator/=(const typed_vec3& rhs)
+        {
+            data /= rhs.data;
+            return *this;
+        }
+
+        constexpr T& operator[](unsigned long index)
+        {
+            return data[index];
+        }
+
+        constexpr const T& operator[](unsigned long index) const
+        {
+            return data[index];
+        }
+
         static_assert(sizeof(data) == sizeof(T) * 3);
     };
 
@@ -110,6 +236,10 @@ namespace raytracer::linalg
     {
         typed_vec4()
             : data{}
+        {}
+
+        typed_vec4(const vec<T, 4>& rhs)
+            : data{ rhs }
         {}
 
         typed_vec4(T val)
@@ -138,6 +268,64 @@ namespace raytracer::linalg
                 T a;
             };
         };
+
+        constexpr typed_vec4 operator+(const typed_vec4& rhs)
+        {
+            return data + rhs.data;
+        }
+
+        constexpr typed_vec4 operator-(const typed_vec4& rhs)
+        {
+            return data - rhs.data;
+        }
+        constexpr typed_vec4 operator*(const typed_vec4& rhs)
+        {
+            return data * rhs.data;
+        }
+        constexpr typed_vec4 operator*(float scalar)
+        {
+            return data * scalar;
+        }
+        constexpr typed_vec4 operator/(const typed_vec4& rhs)
+        {
+            return data / rhs;
+        }
+
+        constexpr typed_vec4& operator+=(const typed_vec4& rhs)
+        {
+            data += rhs.data;
+            return *this;
+        }
+        constexpr typed_vec4& operator-=(const typed_vec4& rhs)
+        {
+            data -= rhs.data;
+            return *this;
+        }
+        constexpr typed_vec4& operator*=(const typed_vec4& rhs)
+        {
+            data *= rhs.data;
+            return *this;
+        }
+        constexpr typed_vec4& operator*=(float scalar)
+        {
+            data *= scalar;
+            return *this;
+        }
+        constexpr typed_vec4& operator/=(const typed_vec4& rhs)
+        {
+            data /= rhs.data;
+            return *this;
+        }
+
+        constexpr T& operator[](unsigned long index)
+        {
+            return data[index];
+        }
+
+        constexpr const T& operator[](unsigned long index) const
+        {
+            return data[index];
+        }
 
         static_assert(sizeof(data) == sizeof(T) * 4);
     };

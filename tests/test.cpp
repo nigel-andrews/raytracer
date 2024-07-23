@@ -48,3 +48,52 @@ TEST_CASE("Generic vector", "[vec]")
     REQUIRE(wow.storage.size() == 5);
     REQUIRE(wow[4] == 5.f);
 }
+
+TEST_CASE("BinOp", "[vec]")
+{
+    vec3f one{ 1.f };
+    vec3f two{ 2.f };
+
+    vec3f three = one + two;
+
+    REQUIRE(three.x == 3.f);
+    REQUIRE(three.y == 3.f);
+    REQUIRE(three.z == 3.f);
+}
+
+TEST_CASE("BinOp-equal", "[vec]")
+{
+    vec3f one{ 1.f };
+    vec3f two{ 2.f };
+
+    one /= two;
+
+    REQUIRE(one.r == 0.5f);
+    REQUIRE(one.g == 0.5f);
+    REQUIRE(one.b == 0.5f);
+}
+
+TEST_CASE("Scale factor", "[vec]")
+{
+    vec4i two{ 2 };
+
+    vec4i four = two * 2;
+
+    REQUIRE(four[0] == 4);
+    REQUIRE(four[1] == 4);
+    REQUIRE(four[2] == 4);
+    REQUIRE(four[3] == 4);
+}
+
+TEST_CASE("Modify value in place", "[vec]")
+{
+    vec3 test;
+    test[0] = 1.f;
+    test[1] = 0.f;
+    test[2] = -1.f;
+
+    // This test just needs to compile
+    REQUIRE(test[0] == 1.f);
+    REQUIRE(test[1] == 0.f);
+    REQUIRE(test[2] == -1.f);
+}
