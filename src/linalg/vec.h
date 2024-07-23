@@ -10,6 +10,8 @@ namespace raytracer::linalg
     template <typename T, unsigned N>
     struct vec
     {
+        typedef T value_type;
+
         static_assert(N > 1);
         std::array<T, N> storage;
 
@@ -20,22 +22,27 @@ namespace raytracer::linalg
 
         vec() = default;
 
-        vec operator+(const vec& rhs);
-        vec operator-(const vec& rhs);
-        float operator*(const vec& rhs);
-        vec operator*(float scalar);
-        vec operator/(const vec& rhs);
+        constexpr vec operator+(const vec& rhs);
+        constexpr vec operator-(const vec& rhs);
+        constexpr vec operator*(const vec& rhs);
+        constexpr vec operator*(float scalar);
+        constexpr vec operator/(const vec& rhs);
 
-        vec& operator+=(const vec& rhs);
-        vec& operator-=(const vec& rhs);
-        vec& operator*=(const vec& rhs);
-        vec& operator/=(const vec& rhs);
+        constexpr vec& operator+=(const vec& rhs);
+        constexpr vec& operator-=(const vec& rhs);
+        constexpr vec& operator*=(const vec& rhs);
+        constexpr vec& operator*=(float scalar);
+        constexpr vec& operator/=(const vec& rhs);
+
+        constexpr T& operator[](unsigned long index);
     };
 
     template <Number T>
     struct typed_vec2
     {
-        typed_vec2() = default;
+        typed_vec2()
+            : data{}
+        {}
 
         typed_vec2(T x, T y)
             : data{ x, y }
@@ -62,7 +69,9 @@ namespace raytracer::linalg
     template <Number T>
     struct typed_vec3
     {
-        typed_vec3() = default;
+        typed_vec3()
+            : data{}
+        {}
 
         typed_vec3(T x, T y, T z)
             : data{ x, y, z }
@@ -91,7 +100,9 @@ namespace raytracer::linalg
     template <Number T>
     struct typed_vec4
     {
-        typed_vec4() = default;
+        typed_vec4()
+            : data{}
+        {}
 
         typed_vec4(T x, T y, T z, T w)
             : data{ x, y, z, w }
