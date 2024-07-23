@@ -44,6 +44,10 @@ namespace raytracer::linalg
             : data{}
         {}
 
+        typed_vec2(T val)
+            : data{ val, val }
+        {}
+
         typed_vec2(T x, T y)
             : data{ x, y }
         {}
@@ -71,6 +75,10 @@ namespace raytracer::linalg
     {
         typed_vec3()
             : data{}
+        {}
+
+        typed_vec3(T val)
+            : data{ val, val, val }
         {}
 
         typed_vec3(T x, T y, T z)
@@ -102,6 +110,10 @@ namespace raytracer::linalg
     {
         typed_vec4()
             : data{}
+        {}
+
+        typed_vec4(T val)
+            : data{ val, val, val, val }
         {}
 
         typed_vec4(T x, T y, T z, T w)
