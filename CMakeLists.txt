@@ -31,3 +31,5 @@ set_target_properties(raytracer PROPERTIES CXX_STANDARD 23 CXX_EXTENSIONS OFF)
 target_include_directories(raytracer PRIVATE ${SRC_DIR})
 
 target_link_libraries(raytracer PRIVATE compile_options)
+
+add_subdirectory(tests)
