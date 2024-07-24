@@ -82,14 +82,17 @@ namespace raytracer::linalg
         {
             return data - rhs.data;
         }
+
         constexpr typed_vec2 operator*(const typed_vec2& rhs)
         {
             return data * rhs.data;
         }
+
         constexpr typed_vec2 operator*(float scalar)
         {
             return data * scalar;
         }
+
         constexpr typed_vec2 operator/(const typed_vec2& rhs)
         {
             return data / rhs;
@@ -100,21 +103,25 @@ namespace raytracer::linalg
             data += rhs.data;
             return *this;
         }
+
         constexpr typed_vec2& operator-=(const typed_vec2& rhs)
         {
             data -= rhs.data;
             return *this;
         }
+
         constexpr typed_vec2& operator*=(const typed_vec2& rhs)
         {
             data *= rhs.data;
             return *this;
         }
+
         constexpr typed_vec2& operator*=(float scalar)
         {
             data *= scalar;
             return *this;
         }
+
         constexpr typed_vec2& operator/=(const typed_vec2& rhs)
         {
             data /= rhs.data;
@@ -179,14 +186,17 @@ namespace raytracer::linalg
         {
             return data - rhs.data;
         }
+
         constexpr typed_vec3 operator*(const typed_vec3& rhs)
         {
             return data * rhs.data;
         }
+
         constexpr typed_vec3 operator*(float scalar)
         {
             return data * scalar;
         }
+
         constexpr typed_vec3 operator/(const typed_vec3& rhs)
         {
             return data / rhs;
@@ -197,21 +207,25 @@ namespace raytracer::linalg
             data += rhs.data;
             return *this;
         }
+
         constexpr typed_vec3& operator-=(const typed_vec3& rhs)
         {
             data -= rhs.data;
             return *this;
         }
+
         constexpr typed_vec3& operator*=(const typed_vec3& rhs)
         {
             data *= rhs.data;
             return *this;
         }
+
         constexpr typed_vec3& operator*=(float scalar)
         {
             data *= scalar;
             return *this;
         }
+
         constexpr typed_vec3& operator/=(const typed_vec3& rhs)
         {
             data /= rhs.data;
@@ -278,14 +292,17 @@ namespace raytracer::linalg
         {
             return data - rhs.data;
         }
+
         constexpr typed_vec4 operator*(const typed_vec4& rhs)
         {
             return data * rhs.data;
         }
+
         constexpr typed_vec4 operator*(float scalar)
         {
             return data * scalar;
         }
+
         constexpr typed_vec4 operator/(const typed_vec4& rhs)
         {
             return data / rhs;
@@ -296,21 +313,25 @@ namespace raytracer::linalg
             data += rhs.data;
             return *this;
         }
+
         constexpr typed_vec4& operator-=(const typed_vec4& rhs)
         {
             data -= rhs.data;
             return *this;
         }
+
         constexpr typed_vec4& operator*=(const typed_vec4& rhs)
         {
             data *= rhs.data;
             return *this;
         }
+
         constexpr typed_vec4& operator*=(float scalar)
         {
             data *= scalar;
             return *this;
         }
+
         constexpr typed_vec4& operator/=(const typed_vec4& rhs)
         {
             data /= rhs.data;
