@@ -1,5 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 
+#include "linalg/functions.h"
 #include "linalg/vec_fwd.h"
 
 TEST_CASE("Basic vector instantiation", "[vec]")
@@ -44,7 +45,7 @@ TEST_CASE("Anonymous union access", "[vec]")
 
 TEST_CASE("Generic vector", "[vec]")
 {
-    vec<float, 5> wow{ 1.f, 2.f, 3.f, 4.f, 5.f };
+    vector_storage<float, 5> wow{ 1.f, 2.f, 3.f, 4.f, 5.f };
     REQUIRE(wow.storage.size() == 5);
     REQUIRE(wow[4] == 5.f);
 }
@@ -96,4 +97,10 @@ TEST_CASE("Modify value in place", "[vec]")
     REQUIRE(test[0] == 1.f);
     REQUIRE(test[1] == 0.f);
     REQUIRE(test[2] == -1.f);
+}
+
+TEST_CASE("Dot product", "[functions]")
+{
+    vec3f a{ 1.f, 2.f, 3.f };
+    vec3f b{ 4.f, 0.f, 7.f };
 }

@@ -8,7 +8,7 @@ namespace raytracer::linalg
     concept Number = std::is_floating_point_v<T> || std::is_integral_v<T>;
 
     template <typename T, unsigned N>
-    struct vec
+    struct vector_storage
     {
         typedef T value_type;
 
@@ -16,24 +16,24 @@ namespace raytracer::linalg
         std::array<T, N> storage;
 
         template <typename... Ts>
-        vec(Ts... args)
+        vector_storage(Ts... args)
             : storage({ args... })
         {}
 
-        vec() = default;
+        vector_storage() = default;
 
-        constexpr vec operator+(const vec& rhs);
+        constexpr vector_storage operator+(const vector_storage& rhs);
 
-        constexpr vec operator-(const vec& rhs);
-        constexpr vec operator*(const vec& rhs);
-        constexpr vec operator*(float scalar);
-        constexpr vec operator/(const vec& rhs);
+        constexpr vector_storage operator-(const vector_storage& rhs);
+        constexpr vector_storage operator*(const vector_storage& rhs);
+        constexpr vector_storage operator*(float scalar);
+        constexpr vector_storage operator/(const vector_storage& rhs);
 
-        constexpr vec& operator+=(const vec& rhs);
-        constexpr vec& operator-=(const vec& rhs);
-        constexpr vec& operator*=(const vec& rhs);
-        constexpr vec& operator*=(float scalar);
-        constexpr vec& operator/=(const vec& rhs);
+        constexpr vector_storage& operator+=(const vector_storage& rhs);
+        constexpr vector_storage& operator-=(const vector_storage& rhs);
+        constexpr vector_storage& operator*=(const vector_storage& rhs);
+        constexpr vector_storage& operator*=(float scalar);
+        constexpr vector_storage& operator/=(const vector_storage& rhs);
 
         constexpr T& operator[](unsigned long index);
         constexpr const T& operator[](unsigned long index) const;
@@ -46,7 +46,7 @@ namespace raytracer::linalg
             : data{}
         {}
 
-        typed_vec2(const vec<T, 2>& rhs)
+        typed_vec2(const vector_storage<T, 2>& rhs)
             : data{ rhs }
         {}
 
@@ -60,7 +60,7 @@ namespace raytracer::linalg
 
         union
         {
-            vec<T, 2> data;
+            vector_storage<T, 2> data;
             struct
             {
                 T x;
@@ -95,7 +95,7 @@ namespace raytracer::linalg
 
         constexpr typed_vec2 operator/(const typed_vec2& rhs)
         {
-            return data / rhs;
+            return data / rhs.data;
         }
 
         constexpr typed_vec2& operator+=(const typed_vec2& rhs)
@@ -148,7 +148,7 @@ namespace raytracer::linalg
             : data{}
         {}
 
-        typed_vec3(const vec<T, 3>& rhs)
+        typed_vec3(const vector_storage<T, 3>& rhs)
             : data{ rhs }
         {}
 
@@ -162,7 +162,7 @@ namespace raytracer::linalg
 
         union
         {
-            vec<T, 3> data;
+            vector_storage<T, 3> data;
             struct
             {
                 T x;
@@ -252,7 +252,7 @@ namespace raytracer::linalg
             : data{}
         {}
 
-        typed_vec4(const vec<T, 4>& rhs)
+        typed_vec4(const vector_storage<T, 4>& rhs)
             : data{ rhs }
         {}
 
@@ -266,7 +266,7 @@ namespace raytracer::linalg
 
         union
         {
-            vec<T, 4> data;
+            vector_storage<T, 4> data;
             struct
             {
                 T x;
