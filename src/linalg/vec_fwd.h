@@ -18,4 +18,5 @@ namespace raytracer::linalg
     GEN_VEC_TYPES(unsigned long, ul);
 
 #undef GEN_VEC_TYPES
+    using point3f = vec3f;
 } // namespace raytracer::linalg
