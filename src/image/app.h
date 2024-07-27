@@ -49,19 +49,22 @@ namespace raytracer::image
             background_color_.b = background_color.b;
             background_color_.a = background_color.a;
 
-            SDL_SetRenderDrawColor(renderer_, background_color_.r,
-                                   background_color_.g, background_color_.g,
-                                   background_color_.a);
+            SDL_CHECK(SDL_SetRenderDrawColor(
+                          renderer_, background_color_.r, background_color_.g,
+                          background_color_.g, background_color_.a)
+                      == 0);
         }
 
         void color_pixel(const rgb& pixel_color, const vec2i& coords)
         {
-            SDL_SetRenderDrawColor(renderer_, pixel_color.r, pixel_color.g,
-                                   pixel_color.g, 255u);
-            SDL_RenderDrawPoint(renderer_, coords.x, coords.y);
-            SDL_SetRenderDrawColor(renderer_, background_color_.r,
-                                   background_color_.g, background_color_.g,
-                                   background_color_.a);
+            SDL_CHECK(SDL_SetRenderDrawColor(renderer_, pixel_color.r,
+                                             pixel_color.g, pixel_color.g, 255u)
+                      == 0);
+            SDL_CHECK(SDL_RenderDrawPoint(renderer_, coords.x, coords.y) == 0);
+            SDL_CHECK(SDL_SetRenderDrawColor(
+                          renderer_, background_color_.r, background_color_.g,
+                          background_color_.g, background_color_.a)
+                      == 0);
         }
 
         void render_scene();

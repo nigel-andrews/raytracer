@@ -14,7 +14,7 @@ namespace raytracer::image
             SDL_Event event;
             while (SDL_PollEvent(&event))
             {
-                SDL_RenderClear(renderer_);
+                SDL_CHECK(SDL_RenderClear(renderer_) == 0);
 
                 // render_scene();
 
