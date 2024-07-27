@@ -40,6 +40,10 @@ namespace raytracer::linalg
         constexpr const T& operator[](unsigned long index) const;
     };
 
+    // FIXME: I am not fond of this approach after all, if would be simpler
+    // using member functions instead and inherit instead of composing. Would
+    // make the code less boilerplate-y. (Or just simply remove the storage
+    // class entirely but even more boilerplate)
     template <Number T>
     struct typed_vec2
     {
@@ -307,7 +311,7 @@ namespace raytracer::linalg
 
         constexpr typed_vec4 operator/(const typed_vec4& rhs)
         {
-            return data / rhs;
+            return data / rhs.data;
         }
 
         constexpr typed_vec4& operator+=(const typed_vec4& rhs)
