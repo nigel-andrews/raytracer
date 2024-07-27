@@ -30,8 +30,9 @@ add_executable(raytracer src/main.cpp)
 
 set_target_properties(raytracer PROPERTIES CXX_STANDARD 23 CXX_EXTENSIONS OFF)
 
-target_include_directories(raytracer PRIVATE ${SRC_DIR})
+target_include_directories(compile_options INTERFACE ${SRC_DIR})
 
-target_link_libraries(raytracer PRIVATE compile_options SDL2)
+add_subdirectory(src/image)
 
+target_link_libraries(raytracer PRIVATE compile_options SDL2 image)
 add_subdirectory(tests)

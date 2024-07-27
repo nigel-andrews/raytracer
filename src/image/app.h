@@ -33,6 +33,12 @@ namespace raytracer::image
             }
         }
 
+        ~window_application()
+        {
+            SDL_DestroyWindow(window_);
+            SDL_DestroyRenderer(renderer_);
+        }
+
         window_application(const window_application&) = delete;
         window_application& operator=(const window_application&) = delete;
 
@@ -58,20 +64,9 @@ namespace raytracer::image
                                    background_color_.a);
         }
 
-        void run()
-        {
-            while (running_)
-            {
-                SDL_Event event;
-                while (SDL_PollEvent(&event))
-                {
-                    SDL_RenderClear(renderer_);
-                    SDL_RenderPresent(renderer_);
+        void render_scene();
 
-                    running_ = event.type != SDL_QUIT;
-                }
-            }
-        }
+        void run();
 
     private:
         SDL_Window* window_;
