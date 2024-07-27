@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+
 #include "vec.h"
 
 namespace raytracer::linalg
@@ -16,7 +18,10 @@ namespace raytracer::linalg
     GEN_VEC_TYPES(unsigned int, u);
     GEN_VEC_TYPES(long, l);
     GEN_VEC_TYPES(unsigned long, ul);
+    GEN_VEC_TYPES(std::uint8_t, u8);
 
 #undef GEN_VEC_TYPES
     using point3f = vec3f;
+    using rgb = vec3u8;
+    using rgba = vec4u8;
 } // namespace raytracer::linalg

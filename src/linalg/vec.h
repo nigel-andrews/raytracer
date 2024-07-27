@@ -13,6 +13,7 @@ namespace raytracer::linalg
         typedef T value_type;
 
         static_assert(N > 1);
+        // FIXME: this should be called data;
         std::array<T, N> storage;
 
         template <typename... Ts>
@@ -60,6 +61,7 @@ namespace raytracer::linalg
 
         union
         {
+            // FIXME: these should be called storage;
             vector_storage<T, 2> data;
             struct
             {

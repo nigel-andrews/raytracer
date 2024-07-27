@@ -4,6 +4,8 @@
 #include <cassert>
 #include <memory>
 
+#include "linalg/functions.h"
+#include "linalg/vec_fwd.h"
 #include "utils.h"
 
 namespace raytracer::image
@@ -34,6 +36,28 @@ namespace raytracer::image
         window_application(const window_application&) = delete;
         window_application& operator=(const window_application&) = delete;
 
+        void background_color_set(const rgba& background_color)
+        {
+            background_color_.r = background_color.r;
+            background_color_.g = background_color.g;
+            background_color_.b = background_color.b;
+            background_color_.a = background_color.a;
+
+            SDL_SetRenderDrawColor(renderer_, background_color_.r,
+                                   background_color_.g, background_color_.g,
+                                   background_color_.a);
+        }
+
+        void color_pixel(const rgb& pixel_color, const vec2i& coords)
+        {
+            SDL_SetRenderDrawColor(renderer_, pixel_color.r, pixel_color.g,
+                                   pixel_color.g, 255u);
+            SDL_RenderDrawPoint(renderer_, coords.x, coords.y);
+            SDL_SetRenderDrawColor(renderer_, background_color_.r,
+                                   background_color_.g, background_color_.g,
+                                   background_color_.a);
+        }
+
         void run()
         {
             while (running_)
@@ -41,6 +65,9 @@ namespace raytracer::image
                 SDL_Event event;
                 while (SDL_PollEvent(&event))
                 {
+                    SDL_RenderClear(renderer_);
+                    SDL_RenderPresent(renderer_);
+
                     running_ = event.type != SDL_QUIT;
                 }
             }
@@ -49,6 +76,7 @@ namespace raytracer::image
     private:
         SDL_Window* window_;
         SDL_Renderer* renderer_;
+        rgba background_color_;
         int width_;
         int height_;
         bool running_ = true;
