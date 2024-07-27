@@ -4,6 +4,8 @@
 #include <cassert>
 #include <memory>
 
+#include "utils.h"
+
 namespace raytracer::image
 {
     class window_application
@@ -20,6 +22,8 @@ namespace raytracer::image
                                        SDL_WINDOWPOS_UNDEFINED, width, height,
                                        window_flags))
             , renderer_(SDL_CreateRenderer(window_, -1, renderer_flags))
+            , width_(width)
+            , height_(height)
         {
             if (!window_ || !renderer_)
             {
@@ -32,13 +36,22 @@ namespace raytracer::image
 
         void run()
         {
-            // TODO: run
-            SDL_Delay(1000);
+            while (running_)
+            {
+                SDL_Event event;
+                while (SDL_PollEvent(&event))
+                {
+                    running_ = event.type != SDL_QUIT;
+                }
+            }
         }
 
     private:
         SDL_Window* window_;
         SDL_Renderer* renderer_;
+        int width_;
+        int height_;
+        bool running_ = true;
     };
 
 } // namespace raytracer::image

@@ -4,10 +4,7 @@ using namespace raytracer;
 
 int main()
 {
-    if (SDL_Init(SDL_INIT_VIDEO))
-    {
-        throw std::runtime_error("Failed to init SDL2");
-    }
+    SDL_CHECK(SDL_Init(SDL_INIT_EVERYTHING) == 0, return 1);
 
     image::window_application raytracer{ "raytracer", 800, 600 };
 
